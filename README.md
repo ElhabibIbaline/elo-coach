@@ -33,8 +33,22 @@ que les navigateurs n'autorisent qu'en contexte sécurisé (`localhost` ou HTTPS
 - Sur le PC (`localhost:5176`) : l'enregistrement fonctionne normalement.
 - Sur le mobile via l'IP du réseau local (`http://192.168.x.x:5176`) : le reste de l'app fonctionne
   très bien (parcours, virelangues, lectures chronométrées, minuteurs, progression), mais le
-  navigateur bloquera l'accès au micro. Pour lever cette limite il faudrait déployer l'app derrière
-  HTTPS (par exemple Vercel ou Netlify) — pas fait ici, à envisager plus tard si besoin.
+  navigateur bloquera l'accès au micro tant que l'app n'est pas servie en HTTPS.
+- Une fois déployée sur GitHub Pages (voir plus bas), l'app est servie en HTTPS et le micro
+  fonctionne aussi depuis le mobile, sur l'URL publique.
+
+## Déploiement GitHub Pages
+
+Un workflow (`.github/workflows/deploy.yml`) build et déploie automatiquement à chaque push sur
+`main`. Étape unique à faire une fois, manuellement, dans les paramètres du repo GitHub :
+**Settings → Pages → Build and deployment → Source : "GitHub Actions"**.
+
+Le repo est privé — publier un site Pages depuis un repo privé nécessite un compte GitHub payant
+(Pro ou plus) ; sur un compte gratuit, l'option Pages n'apparaîtra pas tant que le repo reste privé.
+Le site publié une fois Pages activé (`https://elhabibibaline.github.io/elo-coach/`) est en général
+accessible publiquement à qui a le lien, même si le code source du repo reste privé — sans gravité
+ici puisque l'app ne contient aucune donnée personnelle (la progression reste dans le `localStorage`
+de chaque appareil, jamais sur le serveur).
 
 ## Stack
 
